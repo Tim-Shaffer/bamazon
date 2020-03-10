@@ -74,8 +74,7 @@ function mgrOption(answers)  {
         break;
     case "Add New Product":
         console.log("\n");
-        // addProduct();
-        connection.end();
+        addProduct();
         break;
     default:
         connection.end();
@@ -232,7 +231,7 @@ function addInventory() {
                     console.log("\nProduct Inventory has been updated");
                     
                     menu();
-                    
+
                 }
             );
 
@@ -243,4 +242,70 @@ function addInventory() {
 };
 // --------------------------------------------------------------------------------------
 //  end of addInventory() function
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+//  function to allow the manager to add a new product to the db
+// --------------------------------------------------------------------------------------
+function addProduct() {
+   
+    inquirer
+        .prompt([
+        {
+            name: "product_name",
+            message: "What is the name of the product you would like to add?"
+        },
+        {
+            name: "department_name",
+            message: "What is the name of the department?"
+        },
+        {
+            name: "price",
+            message: "What is the Sales Price?",
+            validate: function (value) {
+                if (parseFloat(value) > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            name: "stock_quantity",
+            message: "What is the initial Stock Quantity?",
+            validate: function (value) {
+                if (parseInt(value) > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        ])
+        .then(function(answer) {
+
+            connection.query(
+                "INSERT INTO products SET ?",
+                {
+                    product_name: answer.product_name,
+                    department_name: answer.department_name,
+                    price: parseFloat(answer.price),
+                    stock_quantity: parseInt(answer.stock_quantity)
+                },
+                function(err) {
+                    if (err) throw err;
+                    
+                    console.log("\nThe Product was successfully Added!");
+                    
+                    menu();
+
+                }
+            );
+
+            
+        });
+
+};
+// --------------------------------------------------------------------------------------
+//  end of addProduct() function
 // --------------------------------------------------------------------------------------

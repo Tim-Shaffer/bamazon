@@ -20,13 +20,14 @@ var connection = mysql.createConnection({
 });
 
 // define variables for the inquirer questions to be asked
-var mgrMenu = [{
+var mgrMenu = [
+    {
     name: "option",
     message: "Select an Option from the Menu",
     type: "list",
     choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Exit"]
     }
-    ];
+];
 
 // --------------------------------------------------------------------------------------
 // connect to the mysql server and sql database
@@ -69,8 +70,7 @@ function mgrOption(answers)  {
         break;
     case "Add to Inventory": 
         console.log("\n");
-        // addInventory();
-        connection.end();
+        addInventory();
         break;
     case "Add New Product":
         console.log("\n");
@@ -166,4 +166,81 @@ function getLowInventory() {
 };
 // --------------------------------------------------------------------------------------
 //  end of getLowInventory() function
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+//  function to allow the manager to select an item and add a specific amount to the inventory
+// --------------------------------------------------------------------------------------
+function addInventory() {
+
+    // query the database for all products
+    connection.query("SELECT * FROM products", function(err, res) {
+
+        if (err) throw err;
+
+        inquirer.prompt([
+            {
+            name: "product",
+            type: "list",
+            message: "What Item do you have inventory to add?",
+            choices: function() {
+                var prodArray = [];
+                for (var i = 0; i < res.length; i++) {
+                    prodArray.push(res[i].product_name);
+                }
+                return prodArray;
+            }
+            },
+            {
+            name: "add_qty",
+            type: "input",
+            message: "How much would you like to add to the current stock?",
+            validate: function (value) {
+                if (parseInt(value) > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            }
+        ])
+        .then(function(answer) {
+            // get the information of the chosen item
+            var chosenItem;
+            
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].product_name === answer.product) {
+                    chosenItem = res[i];
+                }
+            };
+
+            // determine the new quantity so that it can be updated in the db
+            var newQty = chosenItem.stock_quantity + parseInt(answer.add_qty);
+
+            connection.query("UPDATE products SET ? WHERE ?",
+                [
+                    {
+                        stock_quantity: newQty
+                    },
+                    {
+                        item_id: chosenItem.item_id
+                    }
+                ],
+                function(error) {
+                    if (error) throw err;
+                    
+                    console.log("\nProduct Inventory has been updated");
+                    
+                    menu();
+                    
+                }
+            );
+
+        });
+
+    });
+
+};
+// --------------------------------------------------------------------------------------
+//  end of addInventory() function
 // --------------------------------------------------------------------------------------

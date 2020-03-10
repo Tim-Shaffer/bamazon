@@ -61,7 +61,7 @@ function getAllProducts() {
             tableJSON = {
                 "ID": res[i].item_id,
                 "Product": res[i].product_name,
-                "Price": res[i].price
+                "Price": res[i].price.toFixed(2)
             }
         
             productsArray.push(tableJSON);

@@ -19,14 +19,31 @@ var connection = mysql.createConnection({
     database: "bamazon"
 });
 
+// define an array to hold item ids for validation of the item to purchase
+var validItemArray = [];
+
 // define variables for the inquirer questions to be asked
 var customerSelect = [{
     name: "item_id",
     message: "Enter the ID of the item you would like to buy:",
+    validate: function (value) {
+        if (validItemArray.indexOf(parseInt(value)) !== -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     },
     {
     name: "qty",
     message: "How many would you like to purchase?",
+    validate: function (value) {
+            if (parseInt(value) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
     ];
 
@@ -65,8 +82,12 @@ function getAllProducts() {
             }
         
             productsArray.push(tableJSON);
+
+            validItemArray.push(res[i].item_id);
         
         };
+
+        console.log(validItemArray);
 
         // display the contents of the products table
         console.table(productsArray);

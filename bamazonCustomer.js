@@ -87,8 +87,6 @@ function getAllProducts() {
         
         };
 
-        console.log(validItemArray);
-
         // display the contents of the products table
         console.table(productsArray);
 

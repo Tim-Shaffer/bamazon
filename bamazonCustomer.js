@@ -33,7 +33,6 @@ var customerSelect = [{
 // global variables for Product information
 var productID;
 var qtyToPurchase;
-var costPerUnit;
 
 // connect to the mysql server and sql database
 connection.connect(function(err) {
@@ -60,9 +59,9 @@ function getAllProducts() {
         for (var i = 0; i < res.length; i++) {
         
             tableJSON = {
-                "item_id": res[i].item_id,
-                "product_name": res[i].product_name,
-                "price": res[i].price
+                "ID": res[i].item_id,
+                "Product": res[i].product_name,
+                "Price": res[i].price
             }
         
             productsArray.push(tableJSON);
@@ -126,7 +125,7 @@ function checkOrder(id, qty) {
 
             if (res[0].stock_quantity > qty) {
                 var newQty = res[0].stock_quantity - qty;
-                console.log(qty + " of item # " +  id + " was selected for purchase at a cost of " + res[0].price + " each." );
+                console.log("\n" + qty + " of item # " +  id + " was selected for purchase at a cost of $" + res[0].price.toFixed(2) + " each." );
                 completeOrder(id, newQty, res[0].price);
             } else {
                 console.log("Order can not be processed.  Insufficient Quantity In Stock!")
@@ -159,7 +158,7 @@ function completeOrder(id, qty, price) {
         function(err, res) {
             if (err) throw err;
 
-            console.log("Your Order has been placed!\n");
+            console.log("\nYour Order has been placed!\n");
             console.log("The Total Cost for your order is:  $" + (qtyToPurchase * price).toFixed(2));
 
             connection.end();

@@ -65,8 +65,7 @@ function mgrOption(answers)  {
         break;
     case "View Low Inventory":
         console.log("\n");
-        // getLowInventory();
-        connection.end();
+        getLowInventory();
         break;
     case "Add to Inventory": 
         console.log("\n");
@@ -123,4 +122,48 @@ function getAllProducts() {
 };
 // --------------------------------------------------------------------------------------
 //  end of getAllProducts() function
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+//  function to display items with a low inventory
+// --------------------------------------------------------------------------------------
+function getLowInventory() {
+
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
+        
+        if (err) throw err;
+        
+        if (res.length > 0) {
+
+            let productsArray = [];
+            
+            let tableJSON;
+            
+            for (var i = 0; i < res.length; i++) {
+            
+                tableJSON = {
+                    "ID": res[i].item_id,
+                    "Product Name": res[i].product_name,
+                    "Price": res[i].price.toFixed(2),
+                    "In Stock": res[i].stock_quantity,
+                }
+            
+                productsArray.push(tableJSON);
+            
+            };
+
+            // display the contents of the products table
+            console.table(productsArray);
+        
+        } else {
+            console.log("\nAll Products have sufficient inventory. Nothing to display. \n")
+        }
+
+        menu();
+
+    })
+    
+};
+// --------------------------------------------------------------------------------------
+//  end of getLowInventory() function
 // --------------------------------------------------------------------------------------

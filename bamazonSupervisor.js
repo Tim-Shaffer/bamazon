@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
 var superMenu = [
     {
     name: "option",
-    message: "Select an Option from the Menu",
+    message: "What would you like to do?",
     type: "list",
     choices: ["View Product Sales by Department", "Create New Department", "Exit"]
     }
@@ -34,10 +34,54 @@ var superMenu = [
 connection.connect(function(err) {
     if (err) throw err;
 
-    // display the main menu for supervisor processing
-    menu();
+    // display all the products available for sale upon successful connection to the database
+    getAllProducts();
 
 });
+
+// --------------------------------------------------------------------------------------
+//  function to query the db and display all the available products 
+// --------------------------------------------------------------------------------------
+function getAllProducts() {
+
+    connection.query("SELECT * FROM products", function(err, res) {
+        
+        if (err) throw err;
+        
+        let productsArray = [];
+        
+        let tableJSON;
+        
+        for (var i = 0; i < res.length; i++) {
+        
+            tableJSON = {
+                "ID": res[i].item_id,
+                "Product": res[i].product_name,
+                "Department": res[i].department_name,
+                "Price": res[i].price.toFixed(2),
+                "Quantity in Stock": res[i].stock_quantity,
+                "Product Sales": res[i].product_sales.toFixed(2)
+            }
+        
+            productsArray.push(tableJSON);
+        
+        };
+
+        console.log("\n");
+
+        // display the contents of the resulting table
+        console.table(productsArray);
+
+        // trigger the function to display the main Supervisor menu 
+        menu();
+
+    })
+    
+};
+// --------------------------------------------------------------------------------------
+//  end of getAllProducts() function
+// --------------------------------------------------------------------------------------
+
 
 // --------------------------------------------------------------------------------------
 //  function to prompt the supervisor on what action to perform
@@ -79,10 +123,11 @@ function superOption(answers)  {
 // 
 function viewProductSales() {
 
-    var query = "SELECT dept.department_id, dept.department_name, dept.overhead_costs, p.product_sales, p.product_sales - dept.overhead_costs AS total_profit"; 
+    var query = "SELECT dept.department_id, dept.department_name, dept.overhead_costs,"
+    query += " IFNULL(p.product_sales, 0.00) as product_sales, IFNULL(p.product_sales - dept.overhead_costs, 0 - dept.overhead_costs) AS total_profit"; 
     query += " FROM departments AS dept";
-    query += " INNER JOIN (SELECT department_name, SUM(product_sales) AS product_sales FROM products GROUP BY department_name) AS p";
-    query += " WHERE dept.department_name = p.department_name ORDER BY dept.department_id ASC;"
+    query += " LEFT OUTER JOIN (SELECT department_name, SUM(product_sales) AS product_sales FROM products GROUP BY department_name) AS p";
+    query += " ON dept.department_name = p.department_name ORDER BY dept.department_id ASC;"
 
     connection.query(query, function(err, res) {
         
@@ -117,13 +162,6 @@ function viewProductSales() {
     
 };
 
-function addDepartment() {
-
-    console.log("Add a New Department");
-    menu();
-
-};
-
 // --------------------------------------------------------------------------------------
 //  function to end the app
 // --------------------------------------------------------------------------------------
@@ -140,3 +178,52 @@ function endSupervisor() {
 // end of endSupervisor() function
 // --------------------------------------------------------------------------------------
 
+// --------------------------------------------------------------------------------------
+//  function to allow the supervisor to add a new department to the db
+// --------------------------------------------------------------------------------------
+function addDepartment() {
+
+    inquirer
+        .prompt([
+        {
+            name: "department_name",
+            message: "What is the name of the department you would like to add?"
+        },
+        {
+            name: "overhead_costs",
+            message: "What are the projected overhead costs?",
+            validate: function (value) {
+                if (parseFloat(value) > -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        ])
+        .then(function(answer) {
+
+            connection.query(
+                "INSERT INTO departments SET ?",
+                {
+                    department_name: answer.department_name,
+                    overhead_costs: parseFloat(answer.overhead_costs)
+                },
+                function(err) {
+                    if (err) throw err;
+                    
+                    console.log("\nThe " + answer.department_name + " department was successfully added!");
+
+                    // the demo showed displaying all products for sale again but it didn't make sense so just going back to the menu
+                    // getAllProducts();
+                    menu();
+
+                }
+            );
+
+        });
+
+};
+// --------------------------------------------------------------------------------------
+//  end of addDepartment() function
+// --------------------------------------------------------------------------------------

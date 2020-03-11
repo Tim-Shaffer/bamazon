@@ -58,12 +58,14 @@ var qtyToPurchase;
 connection.connect(function(err) {
     if (err) throw err;
 
+    // display all the products available for sale upon successful connection to the database
     getAllProducts();
 
 });
 
-
-// 
+// --------------------------------------------------------------------------------------
+//  function to query the db and display all the available products upon successful connection to the db
+// --------------------------------------------------------------------------------------
 function getAllProducts() {
 
     connection.query("SELECT * FROM products", function(err, res) {
@@ -101,6 +103,9 @@ function getAllProducts() {
     })
     
 };
+// --------------------------------------------------------------------------------------
+//  end of getAllProducts() function
+// --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
 //  function to prompt the user for the product to buy
@@ -147,7 +152,7 @@ function checkOrder(id, qty) {
             
             if (err) throw err;
 
-            if (res[0].stock_quantity > qty) {
+            if (res[0].stock_quantity >= qty) {
                 
                 var newQty = res[0].stock_quantity - qty;
                 var newSalesTotal = parseFloat(res[0].product_sales) + (parseInt(qty) * parseFloat(res[0].price)); 

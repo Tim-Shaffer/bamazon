@@ -101,7 +101,7 @@ function mgrOption(answers)  {
 // --------------------------------------------------------------------------------------
 function getAllProducts(action = 0) {
 
-    connection.query("SELECT * FROM products", function(err, res) {
+    connection.query("SELECT * FROM products ORDER BY item_id", function(err, res) {
         
         if (err) throw err;
         
@@ -149,7 +149,7 @@ function getAllProducts(action = 0) {
 // --------------------------------------------------------------------------------------
 function getLowInventory() {
 
-    connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
+    connection.query("SELECT * FROM products WHERE stock_quantity < 5 ORDER BY stock_quantity", function(err, res) {
         
         if (err) throw err;
         
@@ -273,7 +273,7 @@ function addInventory() {
 function addProduct() {
 
     // query the database for the department names available to be used to add the product 
-    connection.query("SELECT department_name FROM departments", function(err, results) {
+    connection.query("SELECT department_name FROM departments ORDER BY department_name", function(err, results) {
     
         if (err) throw err;
     

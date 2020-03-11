@@ -99,4 +99,4 @@ Product Management Application
 
 *   The Customer will be provided with an initial view of all the products available to purchase including the price and quantity in stock
 
-    ![Screenshot for initial Customer view](/screenshots/index.jpg)
+    ![Screenshot for initial Customer view](/screenshots/customer_startup.jpg)

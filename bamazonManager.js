@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
 var mgrMenu = [
     {
     name: "option",
-    message: "Select an Option from the Menu",
+    message: "What would you like to do?",
     type: "list",
     choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Exit"]
     }
@@ -35,7 +35,7 @@ var mgrMenu = [
 connection.connect(function(err) {
     if (err) throw err;
 
-    // display the main menu for manager processing
+    // display all the manager menu upon successful connection to the database
     menu();
 
 });
@@ -60,25 +60,30 @@ function menu()  {
 function mgrOption(answers)  {
 
     switch(answers.option) {
+        
         case "View Products for Sale":
         console.log("\n");
         getAllProducts(1);
         break;
-    case "View Low Inventory":
-        console.log("\n");
-        getLowInventory();
-        break;
-    case "Add to Inventory": 
-        console.log("\n");
-        getAllProducts();
-        addInventory();
-        break;
-    case "Add New Product":
-        console.log("\n");
-        addProduct();
-        break;
-    default:
-        endManager();
+        
+        case "View Low Inventory":
+            console.log("\n");
+            getLowInventory();
+            break;
+        
+        case "Add to Inventory": 
+            console.log("\n");
+            getAllProducts();
+            addInventory();
+            break;
+    
+        case "Add New Product":
+            console.log("\n");
+            addProduct();
+            break;
+        
+        default:
+            endManager();
     };
 
 };
@@ -88,6 +93,11 @@ function mgrOption(answers)  {
 
 // --------------------------------------------------------------------------------------
 //  function to display all the products and the current inventory amounts
+// 
+//  Parameter values:
+//  action  - 0 (default) - just display the list of products, another menu option will continue
+//          - 1 - display the list of products and then return to the main menu
+// 
 // --------------------------------------------------------------------------------------
 function getAllProducts(action = 0) {
 
@@ -113,6 +123,8 @@ function getAllProducts(action = 0) {
             productsArray.push(tableJSON);
         
         };
+
+        console.log("\n");
 
         // display the contents of the resulting table
         console.table(productsArray);
@@ -281,7 +293,7 @@ function addProduct() {
                   }
                   return deptArray;
                 },
-                message: "What is the name of the department?"
+                message: "What department does this product belong?"
             },
             {
                 name: "price",
@@ -298,7 +310,7 @@ function addProduct() {
                 name: "stock_quantity",
                 message: "What is the initial Stock Quantity?",
                 validate: function (value) {
-                    if (parseInt(value) > 0) {
+                    if (parseInt(value) > -1) {
                         return true;
                     } else {
                         return false;
@@ -319,7 +331,7 @@ function addProduct() {
                     function(err) {
                         if (err) throw err;
                         
-                        console.log("\nThe Product was successfully Added!");
+                        console.log("\n" + answer.product_name + " was successfully added to the products available for sale!");
 
                     }
                 );

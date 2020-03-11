@@ -44,7 +44,15 @@ INSERT INTO departments (department_name)
 SELECT DISTINCT department_name FROM products ORDER BY department_name ASC;
 
 -- Select Query for the supervisor total_profit by department
-SELECT dept.department_id, dept.department_name, dept.overhead_costs, p.product_sales, p.product_sales - dept.overhead_costs AS total_profit  
-  FROM departments AS dept 
-  INNER JOIN (SELECT department_name, SUM(product_sales) AS product_sales FROM products GROUP BY department_name) AS p 
-  WHERE dept.department_name = p.department_name ORDER BY dept.department_id ASC;
+SELECT dept.department_id 
+	, dept.department_name 
+  , dept.overhead_costs
+  -- if there aren't any products for a given department, the product_sales will be NULL, return a 0.00 amount instead
+  , IFNULL(p.product_sales, 0.00) as product_sales
+  -- if there aren't any products for a given department, the product_sales will be NULL, calculate the profit based off 0 instead of an actual value
+	, IFNULL(p.product_sales - dept.overhead_costs, 0 - dept.overhead_costs) AS total_profits
+FROM departments AS dept 
+-- use left outer join so that it displays all departments whether they have products yet or not
+-- use the sub-query to get a summary for each department from the products table since each department can have more than one product
+LEFT OUTER JOIN (SELECT department_name, SUM(product_sales) AS product_sales FROM products GROUP BY department_name) AS p 
+ON p.department_name = dept.department_name  ORDER BY dept.department_id ASC;

@@ -68,7 +68,7 @@ connection.connect(function(err) {
 // --------------------------------------------------------------------------------------
 function getAllProducts() {
 
-    connection.query("SELECT * FROM products", function(err, res) {
+    connection.query("SELECT * FROM products ORDER BY item_id", function(err, res) {
         
         if (err) throw err;
         

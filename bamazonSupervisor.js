@@ -129,7 +129,7 @@ function viewProductSales() {
     query += " IFNULL(p.product_sales, 0.00) as product_sales, IFNULL(p.product_sales - dept.overhead_costs, 0 - dept.overhead_costs) AS total_profit"; 
     query += " FROM departments AS dept";
     query += " LEFT OUTER JOIN (SELECT department_name, SUM(product_sales) AS product_sales FROM products GROUP BY department_name) AS p";
-    query += " ON dept.department_name = p.department_name ORDER BY dept.department_id ASC;"
+    query += " ON dept.department_name = p.department_name ORDER BY total_profit DESC;"
 
     connection.query(query, function(err, res) {
         

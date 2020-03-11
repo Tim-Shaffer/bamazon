@@ -64,7 +64,7 @@ connection.connect(function(err) {
 });
 
 // --------------------------------------------------------------------------------------
-//  function to query the db and display all the available products upon successful connection to the db
+//  function to query the db and display all the available products 
 // --------------------------------------------------------------------------------------
 function getAllProducts() {
 
@@ -122,7 +122,7 @@ function pickProductToBuy()  {
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
-//  function to process order of the product the customer would like to purchase
+//  function to process an order of the product the customer would like to purchase
 // --------------------------------------------------------------------------------------
 function processOrder(order) {
 
@@ -137,7 +137,9 @@ function processOrder(order) {
 // --------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
-//  function to process order of the product the customer would like to purchase
+//  function to check the order of the product the customer would like to purchase
+//  - if there is enough of the product left in stock, complete the order
+//  - it the amount requested is more then what is in stock, don't allow the order and log a message
 // --------------------------------------------------------------------------------------
 function checkOrder(id, qty) {
     
@@ -154,6 +156,7 @@ function checkOrder(id, qty) {
 
             if (res[0].stock_quantity >= qty) {
                 
+                // calculate the values that will be used to update the database in the completeOrder() function
                 var newQty = res[0].stock_quantity - qty;
                 var newSalesTotal = parseFloat(res[0].product_sales) + (parseInt(qty) * parseFloat(res[0].price)); 
                 var product = res[0].product_name;
@@ -177,6 +180,14 @@ function checkOrder(id, qty) {
 
 // --------------------------------------------------------------------------------------
 //  function to complete the order and display the details to the customer
+// 
+//  Parameter values:
+//  id - the item_id of the product being purchased to be used to limit the update query
+//  qty - the quantity left after the purchase to be used to set the updated stock_quantity
+//  price - the price of the item being purchased 
+//  sales - the product_sales total to be used to set the updated product_sales
+//  product - the name of the product to be displayed back to the customer on successful update
+// 
 // --------------------------------------------------------------------------------------
 function completeOrder(id, qty, price, sales, product) {
     

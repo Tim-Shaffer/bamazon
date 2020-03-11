@@ -24,28 +24,31 @@ var validItemArray = [];
 
 // define variables for the inquirer questions to be asked
 var customerSelect = [{
-    name: "item_id",
-    message: "Enter the ID of the item you would like to buy:",
-    validate: function (value) {
-        if (validItemArray.indexOf(parseInt(value)) !== -1 ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    },
-    {
-    name: "qty",
-    message: "How many would you like to purchase?",
-    validate: function (value) {
-            if (parseInt(value) > 0) {
+        name: "item_id",
+        message: "Enter the ID of the item you would like to buy [Q to Quit]",
+        validate: function (value) {
+            if (value.toLowerCase() === 'q') {
+                endCustomer();
+            } else if (validItemArray.indexOf(parseInt(value)) !== -1) {
                 return true;
             } else {
                 return false;
             }
         }
-    }
-    ];
+    },
+    {
+        name: "qty",
+        message: "How many would you like to purchase? [Q to Quit]",
+        validate: function (value) {
+            if (value.toLowerCase() === 'q') {
+                endCustomer();
+            } else if (parseInt(value) > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }];
 
 // global variables for Product information
 var productID;
@@ -56,8 +59,6 @@ connection.connect(function(err) {
     if (err) throw err;
 
     getAllProducts();
-    
-    // connection.end();
 
 });
 
@@ -78,7 +79,9 @@ function getAllProducts() {
             tableJSON = {
                 "ID": res[i].item_id,
                 "Product": res[i].product_name,
-                "Price": res[i].price.toFixed(2)
+                "Department": res[i].department_name,
+                "Price": res[i].price.toFixed(2),
+                "Quantity in Stock": res[i].stock_quantity
             }
         
             productsArray.push(tableJSON);
@@ -86,6 +89,8 @@ function getAllProducts() {
             validItemArray.push(res[i].item_id);
         
         };
+
+        console.log("\n");
 
         // display the contents of the products table
         console.table(productsArray);
@@ -143,13 +148,20 @@ function checkOrder(id, qty) {
             if (err) throw err;
 
             if (res[0].stock_quantity > qty) {
+                
                 var newQty = res[0].stock_quantity - qty;
-                console.log("\n" + qty + " of item # " +  id + " was selected for purchase at a cost of $" + res[0].price.toFixed(2) + " each." );
-                completeOrder(id, newQty, res[0].price);
+                var newSalesTotal = parseFloat(res[0].product_sales) + (parseInt(qty) * parseFloat(res[0].price)); 
+                var product = res[0].product_name;
+
+                completeOrder(id, newQty, res[0].price, newSalesTotal, product);
+
             } else {
-                console.log("Order can not be processed.  Insufficient Quantity In Stock!")
-                connection.end();
+               
+                console.log("\nOrder can not be processed.  Insufficient Quantity In Stock!")
+
             }
+
+            getAllProducts();
 
         }
     )
@@ -161,13 +173,14 @@ function checkOrder(id, qty) {
 // --------------------------------------------------------------------------------------
 //  function to complete the order and display the details to the customer
 // --------------------------------------------------------------------------------------
-function completeOrder(id, qty, price) {
+function completeOrder(id, qty, price, sales, product) {
     
     connection.query(
         "UPDATE products SET ? WHERE ?",
         [
             {
                 stock_quantity: qty,
+                product_sales: sales,
             },
             {
                 item_id: id
@@ -177,10 +190,9 @@ function completeOrder(id, qty, price) {
         function(err, res) {
             if (err) throw err;
 
-            console.log("\nYour Order has been placed!\n");
-            console.log("The Total Cost for your order is:  $" + (qtyToPurchase * price).toFixed(2));
-
-            connection.end();
+            console.log("\nYour Order has been placed!");
+            console.log("\nYou have purchased " + qtyToPurchase + " " + product + " at a cost of $" + price.toFixed(2) + " each." );
+            console.log("\nThe Total Cost for your order is:  $" + (qtyToPurchase * price).toFixed(2));
 
         }
     )   
@@ -188,4 +200,20 @@ function completeOrder(id, qty, price) {
 };
 // --------------------------------------------------------------------------------------
 // end of completeOrder() function
+// --------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+//  function to end the game
+// --------------------------------------------------------------------------------------
+function endCustomer() {
+    
+    console.log("\n\nCome back again soon!");
+
+    // Exit the app
+    connection.end();
+    process.exit();
+
+};
+// --------------------------------------------------------------------------------------
+// end of endCustomer() function
 // --------------------------------------------------------------------------------------

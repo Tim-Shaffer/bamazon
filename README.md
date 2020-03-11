@@ -100,3 +100,17 @@ As a Customer of the bamazon store, the user will be able to place orders for an
 *   The Customer will be provided with an initial view of all the products available to purchase including the price and quantity in stock
 
     ![Screenshot for initial Customer view](/screenshots/customer_startup.jpg)
+
+## Manager Experience
+As a Manager of the bamazon store, the user will be able to view sales information for all the products available.  The Manager can also perform maintenance tasks such as monitoring products with a low inventory, adding items to inventory, and adding new products to be listed for sale.
+
+*   The Manager will be provided with menu of options upon successful connection to the database.
+
+    ![Screenshot for initial Manager view](/screenshots/manager_startup.jpg)
+
+## Supervisor Experience
+As a Supervisor of the bamazon store, the user will be able to view sales information for all the products available in the store.  The Supervisor can monitor sales and expense information summarized by departments.  The supervisor will also be able to add new departments as needed. 
+
+*   The Supervisor will be provided with an initial view of all the products available in the store including the Product Sales data before a menu of options is presented.
+
+    ![Screenshot for initial Manager view](/screenshots/supervisor_startup.jpg)

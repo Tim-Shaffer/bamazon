@@ -332,11 +332,11 @@ function addProduct() {
                         if (err) throw err;
                         
                         console.log("\n" + answer.product_name + " was successfully added to the products available for sale!");
+                                        
+                        menu();
 
                     }
                 );
-                
-                menu();
 
             });
 

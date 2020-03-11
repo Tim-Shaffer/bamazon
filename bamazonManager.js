@@ -114,13 +114,16 @@ function getAllProducts(action = 0) {
         
         };
 
+        // display the contents of the resulting table
         console.table(productsArray);
 
+        // added the action so that the display of all products could be used in the add inventory flow 
+        // without going back to the menu until after the inventory was updated. 
         if (action === 1) {
             
             menu();
         
-        }
+        };
 
     })
     
@@ -159,6 +162,7 @@ function getLowInventory() {
             
             };
 
+            // display the contents of the resulting table
             console.table(productsArray);
         
         } else {

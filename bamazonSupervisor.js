@@ -79,8 +79,41 @@ function superOption(answers)  {
 // 
 function viewProductSales() {
 
-    console.log("View Product Sales Information");
-    menu();
+    var query = "SELECT dept.department_id, dept.department_name, dept.overhead_costs, p.product_sales, p.product_sales - dept.overhead_costs AS total_profit"; 
+    query += " FROM departments AS dept";
+    query += " INNER JOIN (SELECT department_name, SUM(product_sales) AS product_sales FROM products GROUP BY department_name) AS p";
+    query += " WHERE dept.department_name = p.department_name ORDER BY dept.department_id ASC;"
+
+    connection.query(query, function(err, res) {
+        
+        if (err) throw err;
+        
+        let deptArray = [];
+        
+        let tableJSON;
+        
+        for (var i = 0; i < res.length; i++) {
+        
+            tableJSON = {
+                "Dept ID": res[i].department_id,
+                "Department": res[i].department_name,
+                "Overhead Costs": res[i].overhead_costs.toFixed(2),
+                "Product Sales": res[i].product_sales.toFixed(2),
+                "Total Profit": res[i].total_profit.toFixed(2)
+            }
+        
+            deptArray.push(tableJSON);
+        
+        };
+
+        console.log("\n");
+
+        // display the contents of the resulting table
+        console.table(deptArray);
+
+        menu();
+
+    })
     
 };
 
@@ -88,7 +121,7 @@ function addDepartment() {
 
     console.log("Add a New Department");
     menu();
-    
+
 };
 
 // --------------------------------------------------------------------------------------

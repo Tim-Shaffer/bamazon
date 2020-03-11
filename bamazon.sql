@@ -43,7 +43,7 @@ ALTER TABLE products ADD product_sales DECIMAL(10,2) DEFAULT 0.00;
 INSERT INTO departments (department_name)
 SELECT DISTINCT department_name FROM products ORDER BY department_name ASC;
 
--- Select Query for the supervisor total_profit by department
+-- Select Query for the supervisor total_profit by department 
 SELECT dept.department_id 
 	, dept.department_name 
   , dept.overhead_costs

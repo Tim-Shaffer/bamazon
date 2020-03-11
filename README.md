@@ -1,6 +1,9 @@
 # bamazon
 Product Management Application
 
+# Author 
+> Tim Shaffer
+
 ## Tech Used
 * JavaScript
 * node.js
@@ -26,7 +29,7 @@ Product Management Application
         * GROUP BY
 
 ## Command Line Interface (CLI) 
-* tasked with creating a CLI that interacts with a user and provides options or data based on a role
+* Tasked with creating a CLI that interacts with a user and provides options or data based on a role
 
 * Create an Amazon-like storefront that will Create, Read, and Update data within a MySQL database. 
     * The app will take in orders from Customers and deplete stock from the store's inventory.

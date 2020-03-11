@@ -38,23 +38,23 @@ Product Management Application
 
 # Getting started
 
-1.   Fork the the repository into your own space on GitHub
-1.   Clone your forked repository into your own workspace.
-1.   Within the terminal and the folder containing the repository, you must install the required node package dependencies defined in the **package.json** file into your folder.  Trigger the package install  
+1. Fork the the repository into your own space on GitHub
+1. Clone your forked repository into your own workspace.
+1. Within the terminal and the folder containing the repository, you must install the required node package dependencies defined in the **package.json** file into your folder.  Trigger the package install  
 
 >
 > npm i 
 > 
 
-4.   Create an environment `.env` file to contain information needed about your particular MySQL database server to be able to connect:
+4. Create an environment `.env` file to contain information needed about your particular MySQL database server to be able to connect:
 
     DB_HOST=????
     DB_USER=????
     DB_PASS=????
 
-5.   Update the specifics according to your system settings.
-1.   Open MySQL Workbench and connect to the Server that you identified in the environment variables.
-1.   In a new Query Window, copy and run the following commands that are also found in the `bamazon.sql` file.
+5. Update the specifics according to your system settings and save.
+1. Open MySQL Workbench and connect to the Server that you identified in the environment variables.
+1. In a new Query Window, copy and run the following commands that are also found in the `bamazon.sql` file.
 
     -- Create the Database if it doesn't already exist
     CREATE DATABASE IF NOT EXISTS bamazon;
@@ -72,7 +72,7 @@ Product Management Application
     PRIMARY KEY (item_id)
     );
 
-8.   Insert some mock products with different departments, if you need help, copy and execute the below.
+8. Insert some mock products with different departments, if you need help, copy and execute the below.
 
     -- Insert 10 mock products into the products table
     INSERT INTO products (product_name, department_name, price, stock_quantity)
@@ -87,15 +87,15 @@ Product Management Application
     ("Ring Floodlight Camera", "Lighting", 189.99, 100),
     ("Army Gear Flashlight 2-Pack", "Lighting", 14.99, 100);
 
-9.   This will give you the necessary data to start to view the process as a Customer.
-1.   Trigger `node` and the corresponding **JavaScript** file for the requested role.
+9. This will give you the necessary data to start to view the process as a Customer.
+1. Trigger `node` and the corresponding **JavaScript** file for the requested role.
 
 >
 > node bamazonCustomer
 >
 
 ## Customer Experience
-    As a Customer of the bamazon store, the user will be able to place orders for any products available, as long as there is enough stock to cover the requested quantity.
+As a Customer of the bamazon store, the user will be able to place orders for any products available, as long as there is enough stock to cover the requested quantity.
 
 *   The Customer will be provided with an initial view of all the products available to purchase including the price and quantity in stock
 

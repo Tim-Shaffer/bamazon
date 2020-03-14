@@ -11,7 +11,7 @@ Product Management Application
 * [Customer Experience](https://github.com/Tim-Shaffer/bamazon#customer-experience)
 * [Manager Experience](https://github.com/Tim-Shaffer/bamazon#manager-experience)
 * [Supervisor Experience](https://github.com/Tim-Shaffer/bamazon#supervisor-experience)
-* [Video Demonstration](https://github.com/Tim-Shaffer/bamazon#video_demonstration)
+* [Video Demonstration](https://github.com/Tim-Shaffer/bamazon#video-demonstration)
 
 # Tech Used
 * JavaScript

@@ -111,23 +111,23 @@ As a Customer of the bamazon store, the user will be able to place orders for an
 
 *   The Customer will be able to select an item to purchase by item id and then the quantity they would like to purchase.
 
-    ![Screenshot for initial Customer view](/screenshots/customer_select.jpg)
+    ![Screenshot for Customer selecting an item to purchase](/screenshots/customer_select.jpg)
 
 *   If the order can be processed, the customer is provided with the details of the order and may then pick another item.  The stock_quantity is updated with the new total amount after the sale.
 
-    ![Screenshot for initial Customer view](/screenshots/customer_completed.jpg)
+    ![Screenshot for Customer order being successfully completed](/screenshots/customer_completed.jpg)
 
 *   If the customer selects an item and tries to purchase more than what is currently in stock.....
 
-    ![Screenshot for initial Customer view](/screenshots/customer_select_too_many.jpg)
+    ![Screenshot for Customer trying to buy too much](/screenshots/customer_select_too_many.jpg)
 
 *   A message that the order cannot be processed due to insufficient quantity will be logged and the customer can pick another item.
 
-    ![Screenshot for initial Customer view](/screenshots/customer_order_failed.jpg)
+    ![Screenshot for Customer Order being declined](/screenshots/customer_order_failed.jpg)
 
 *   When the customer does not want to make any more purchases, they select 'q' and the session is ended.
 
-    ![Screenshot for initial Customer view](/screenshots/customer_quit.jpg)
+    ![Screenshot for Customer Quit](/screenshots/customer_quit.jpg)
 
 # Manager Experience
 As a Manager of the bamazon store, the user will be able to view sales information for all the products available.  The Manager can also perform maintenance tasks such as monitoring products with a low inventory, adding items to inventory, and adding new products to be listed for sale.
@@ -141,4 +141,20 @@ As a Supervisor of the bamazon store, the user will be able to view sales inform
 
 *   The Supervisor will be provided with an initial view of all the products available in the store including the Product Sales data before a menu of options is presented.
 
-    ![Screenshot for initial Manager view](/screenshots/supervisor_startup.jpg)
+    ![Screenshot for initial Supervisor view](/screenshots/supervisor_startup.jpg)
+
+*   Selecting to "View Product Sales by Department", the store Supervisor is presented with a report for all the departments to include the overhead costs, product sales, and total profits.  The report is displayed with the most profitable department at the top down through the least profitable at the bottom.
+
+    ![Screenshot for Supervisor Sales by Department](/screenshots/supervisor_sales.jpg)
+
+*   The Supervisor can also select to Create a New Department at which point the prompts will walk them through the entries to populate a new department including the name of the department and the projected overhead costs.
+
+    ![Screenshot for Supervisor Adding a new Department](/screenshots/supervisor_new_department.jpg)
+
+*   After the department is added, re-selecting the "View Product Sales by Department" will be updated with the new department being placed in it's order depending upon the overhead costs entered.
+
+    ![Screenshot for Supervisor Sales after Department Add](/screenshots/supervisor_sales_after_add.jpg)
+
+*   When the Supervisor is completed, they select 'exit' and the session is ended.
+
+    ![Screenshot for Supervisor Exit](/screenshots/supervisor_exit.jpg)

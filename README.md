@@ -101,6 +101,26 @@ As a Customer of the bamazon store, the user will be able to place orders for an
 
     ![Screenshot for initial Customer view](/screenshots/customer_startup.jpg)
 
+*   The Customer will be able to select an item to purchase by item id and then the quantity they would like to purchase.
+
+    ![Screenshot for initial Customer view](/screenshots/customer_select.jpg)
+
+*   If the order can be processed, the customer is provided with the details of the order and may then pick another item.  The stock_quantity is updated with the new total amount after the sale.
+
+    ![Screenshot for initial Customer view](/screenshots/customer_completed.jpg)
+
+*   If the customer selects an item and tries to purchase more than what is currently in stock.....
+
+    ![Screenshot for initial Customer view](/screenshots/customer_select_too_many.jpg)
+
+*   A message that the order cannot be processed due to insufficient quantity will be logged and the customer can pick another item.
+
+    ![Screenshot for initial Customer view](/screenshots/customer_order_failed.jpg)
+
+*   When the customer does not want to make any more purchases, they select 'q' and the session is ended.
+
+    ![Screenshot for initial Customer view](/screenshots/customer_quit.jpg)
+
 ## Manager Experience
 As a Manager of the bamazon store, the user will be able to view sales information for all the products available.  The Manager can also perform maintenance tasks such as monitoring products with a low inventory, adding items to inventory, and adding new products to be listed for sale.
 

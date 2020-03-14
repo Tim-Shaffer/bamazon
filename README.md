@@ -11,6 +11,7 @@ Product Management Application
 * [Customer Experience](https://github.com/Tim-Shaffer/bamazon#customer-experience)
 * [Manager Experience](https://github.com/Tim-Shaffer/bamazon#manager-experience)
 * [Supervisor Experience](https://github.com/Tim-Shaffer/bamazon#supervisor-experience)
+* [Video Demonstration](https://github.com/Tim-Shaffer/bamazon#video_demonstration)
 
 # Tech Used
 * JavaScript
@@ -136,6 +137,54 @@ As a Manager of the bamazon store, the user will be able to view sales informati
 
     ![Screenshot for initial Manager view](/screenshots/manager_startup.jpg)
 
+*   Selecting to "View Products for Sale", the Manager will be presented with a list similar to the Customer except the Manger view also includes the total Product Sales
+
+    ![Screenshot for Manger products for sale](/screenshots/manager_products_for_sale.jpg)
+
+*   Selecting to "View Low Inventory", the Manager will be presented with a list similar to the view products, but only with those items whose inventory has fallen below 5 left in stock.
+
+    ![Screenshot for Manger products for sale](/screenshots/manager_low_inventory.jpg)
+
+*   Selecting to "Add to Inventory", the Manager will be presented with the list of items for sale and then a selectable list of those items for adding inventory.
+
+    ![Screenshot for Manger products for sale](/screenshots/manager_add_inventory.jpg)
+
+*   Upon selecting a particular item, the Manager can then add an amount to the current stock.  The amount is added to the current stock!
+
+    ![Screenshot for Manger products for sale](/screenshots/manager_add_inventory_quatinty.jpg)
+
+*   Selecting to "View Products for Sale" after adding to the inventory, the Manager will be able to see the Quantity in Stock changed by the amount added.
+
+    ![Screenshot for Manger products for sale](/screenshots/manager_products_for_sale_after_add.jpg)
+
+*   The Manager can also select to "Add New Product" at which point the prompts will walk them through the entries to populate a new product.
+
+    ![Screenshot for Manager Adding a new Product](/screenshots/manager_new_product_part1.jpg)
+
+*   The Departments will be limited to the actual departments available within the store.
+
+    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part2.jpg)
+
+*   The Departments will be limited to the actual departments available within the store...
+
+    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part2.jpg)
+
+*   The Price and the Initial Stock Quantity are then added...
+
+    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part3.jpg)
+
+*   A message is displayed after the product has been successfully added to the database.
+
+    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part4.jpg)
+
+*   Selecting to "View Products for Sale" after adding a new product, the Manager will be able to see the new product in the list. 
+
+    ![Screenshot for Manger products for sale](/screenshots/manager_new_product_part5.jpg)
+
+*   When the Manager is completed, they select 'exit' and the session is ended.
+
+    ![Screenshot for Manager Exit](/screenshots/manager_exit.jpg)
+
 # Supervisor Experience
 As a Supervisor of the bamazon store, the user will be able to view sales information for all the products available in the store.  The Supervisor can monitor sales and expense information summarized by departments.  The supervisor will also be able to add new departments as needed. 
 
@@ -158,3 +207,7 @@ As a Supervisor of the bamazon store, the user will be able to view sales inform
 *   When the Supervisor is completed, they select 'exit' and the session is ended.
 
     ![Screenshot for Supervisor Exit](/screenshots/supervisor_exit.jpg)
+
+# Video Demonstration 
+
+* Video of all the different views available with the working app can be found here: https://youtu.be/hgjGsK4woRQ

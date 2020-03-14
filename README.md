@@ -4,7 +4,15 @@ Product Management Application
 # Author 
 > Tim Shaffer
 
-## Tech Used
+## Contents
+* [Tech Used](https://github.com/Tim-Shaffer/bamazon#tech-used)
+* [CLI](https://github.com/Tim-Shaffer/bamazon#command-line-interface-cli)
+* [Getting Started](https://github.com/Tim-Shaffer/bamazon#getting-started)
+* [Customer Experience](https://github.com/Tim-Shaffer/bamazon#customer-experience)
+* [Manager Experience](https://github.com/Tim-Shaffer/bamazon#manager-experience)
+* [Supervisor Experience](https://github.com/Tim-Shaffer/bamazon#supervisor-experience)
+
+# Tech Used
 * JavaScript
 * node.js
     * dotenv
@@ -28,7 +36,7 @@ Product Management Application
         * SUM
         * GROUP BY
 
-## Command Line Interface (CLI) 
+# Command Line Interface (CLI) 
 * Tasked with creating a CLI that interacts with a user and provides options or data based on a role
 
 * Create an Amazon-like storefront that will Create, Read, and Update data within a MySQL database. 
@@ -94,7 +102,7 @@ Product Management Application
 > node bamazonCustomer
 >
 
-## Customer Experience
+# Customer Experience
 As a Customer of the bamazon store, the user will be able to place orders for any products available, as long as there is enough stock to cover the requested quantity.
 
 *   The Customer will be provided with an initial view of all the products available to purchase including the price and quantity in stock
@@ -121,14 +129,14 @@ As a Customer of the bamazon store, the user will be able to place orders for an
 
     ![Screenshot for initial Customer view](/screenshots/customer_quit.jpg)
 
-## Manager Experience
+# Manager Experience
 As a Manager of the bamazon store, the user will be able to view sales information for all the products available.  The Manager can also perform maintenance tasks such as monitoring products with a low inventory, adding items to inventory, and adding new products to be listed for sale.
 
 *   The Manager will be provided with menu of options upon successful connection to the database.
 
     ![Screenshot for initial Manager view](/screenshots/manager_startup.jpg)
 
-## Supervisor Experience
+# Supervisor Experience
 As a Supervisor of the bamazon store, the user will be able to view sales information for all the products available in the store.  The Supervisor can monitor sales and expense information summarized by departments.  The supervisor will also be able to add new departments as needed. 
 
 *   The Supervisor will be provided with an initial view of all the products available in the store including the Product Sales data before a menu of options is presented.

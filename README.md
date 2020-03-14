@@ -143,39 +143,35 @@ As a Manager of the bamazon store, the user will be able to view sales informati
 
 *   Selecting to "View Low Inventory", the Manager will be presented with a list similar to the view products, but only with those items whose inventory has fallen below 5 left in stock.
 
-    ![Screenshot for Manger products for sale](/screenshots/manager_low_inventory.jpg)
+    ![Screenshot for View Low Inventory](/screenshots/manager_low_inventory.jpg)
 
 *   Selecting to "Add to Inventory", the Manager will be presented with the list of items for sale and then a selectable list of those items for adding inventory.
 
-    ![Screenshot for Manger products for sale](/screenshots/manager_add_inventory.jpg)
+    ![Screenshot for Add to Inventory](/screenshots/manager_add_inventory.jpg)
 
-*   Upon selecting a particular item, the Manager can then add an amount to the current stock.  The amount is added to the current stock!
+*   Upon selecting a particular item, the Manager can then add an amount to the current stock. 
 
-    ![Screenshot for Manger products for sale](/screenshots/manager_add_inventory_quatinty.jpg)
+    ![Screenshot for adding a quantity to inventory](/screenshots/manager_add_inventory_quantity.jpg)
 
 *   Selecting to "View Products for Sale" after adding to the inventory, the Manager will be able to see the Quantity in Stock changed by the amount added.
 
-    ![Screenshot for Manger products for sale](/screenshots/manager_products_for_sale_after_add.jpg)
+    ![Screenshot for Products for Sale after adding to inventory](/screenshots/manager_products_for_sale_after_add.jpg)
 
 *   The Manager can also select to "Add New Product" at which point the prompts will walk them through the entries to populate a new product.
 
-    ![Screenshot for Manager Adding a new Product](/screenshots/manager_new_product_part1.jpg)
+    ![Screenshot for Adding New Product](/screenshots/manager_new_product_part1.jpg)
 
 *   The Departments will be limited to the actual departments available within the store.
 
-    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part2.jpg)
-
-*   The Departments will be limited to the actual departments available within the store...
-
-    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part2.jpg)
+    ![Screenshot for Manager Display of the Departments](/screenshots/manager_new_product_part2.jpg)
 
 *   The Price and the Initial Stock Quantity are then added...
 
-    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part3.jpg)
+    ![Screenshot for Manager adding Price and Stock](/screenshots/manager_new_product_part3.jpg)
 
 *   A message is displayed after the product has been successfully added to the database.
 
-    ![Screenshot for Manager Selecting the Department](/screenshots/manager_new_product_part4.jpg)
+    ![Screenshot for Product Added Successfully](/screenshots/manager_new_product_part4.jpg)
 
 *   Selecting to "View Products for Sale" after adding a new product, the Manager will be able to see the new product in the list. 
 

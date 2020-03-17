@@ -206,4 +206,4 @@ As a Supervisor of the bamazon store, the user will be able to view sales inform
 
 # Video Demonstration 
 
-* Video of all the different views available with the working app can be found here: https://youtu.be/tx6Sx95KYrM
+* Video of all the different views available with the working app can be found here: https://youtu.be/ztO9-FolBIw

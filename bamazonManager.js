@@ -257,10 +257,10 @@ function addInventory() {
                     
                     console.log("\nProduct Inventory has been updated");
 
+                    menu();
+
                 }
             );
-
-            menu();
 
         });
 

@@ -1,3 +1,7 @@
+// -------------  TRYING TO KEEP THE WARNING MESSAGE FROM DISPLAYING ------------
+require('events').EventEmitter.defaultMaxListeners = 0;
+// --------------------------------------------------------------------------------------
+
 // code to read and set any environment variables with the .env package 
 require("dotenv").config();
 
